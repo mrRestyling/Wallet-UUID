@@ -14,6 +14,8 @@ type Storage struct {
 	Db *sqlx.DB
 }
 
+//
+
 func New(conn *sqlx.DB) *Storage {
 	return &Storage{
 		Db: conn,
