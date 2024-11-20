@@ -17,7 +17,7 @@ import (
 
 func main() {
 
-	// .env
+	// .env (для локальной сборки)
 	if err := godotenv.Load(); err != nil {
 		log.Println("err load .env", err)
 	}

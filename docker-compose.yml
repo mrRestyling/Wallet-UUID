@@ -1,6 +1,8 @@
 services:
+
   postgres:
     image: 'postgres:15.0'
+    container_name: pSQL
     ports:
       - "5432:5432"
     env_file:
@@ -16,6 +18,23 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data/
       - ./migrations/wallet.sql:/docker-entrypoint-initdb.d/wallet.sql
+
+
+  app:
+    build: .
+    container_name: walletAPP
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    volumes:
+      - ./cmd:/app/cmd
+    depends_on:
+      - postgres
 
 volumes:
   postgres_data:

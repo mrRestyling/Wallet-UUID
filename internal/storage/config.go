@@ -4,6 +4,7 @@ import (
 	"log"
 	"os"
 	"strings"
+	"time"
 
 	"github.com/jmoiron/sqlx"
 
@@ -13,8 +14,6 @@ import (
 type Storage struct {
 	Db *sqlx.DB
 }
-
-//
 
 func New(conn *sqlx.DB) *Storage {
 	return &Storage{
@@ -45,15 +44,18 @@ func SayError(err error, message string) {
 
 func Config() string {
 
-	host := "host=" + os.Getenv("HOST_WALLET")
+	// host := "host=" + os.Getenv("HOST_WALLET")
+	host := "host=postgres"
 	user := "user=" + os.Getenv("POSTGRES_USER")
 	password := "password=" + os.Getenv("POSTGRES_PASSWORD")
 	dbname := "dbname=" + os.Getenv("POSTGRES_DB")
 	ssl := "sslmode=disable"
 
-	qArr := []string{host, user, password, dbname, ssl}
+	qArr := []string{host, user, dbname, ssl, password}
 
 	config := strings.Join(qArr, " ")
+
+	time.Sleep(1 * time.Second) // для контейнеров
 
 	return config
 
