@@ -7,21 +7,28 @@ import (
 )
 
 type Handlers struct {
-	E *echo.Echo
+	E    *echo.Echo
+	Serv ServInt
 }
 
-func New() *Handlers {
+type ServInt interface {
+}
+
+func New(s ServInt) *Handlers {
 	return &Handlers{
-		E: echo.New(),
+		E:    echo.New(),
+		Serv: s,
 	}
 }
 
 func (h *Handlers) ChangeWallet(c echo.Context) error {
 
-	return c.JSON(http.StatusOK, "No IMP!!!")
+	return c.JSON(http.StatusOK, "No IMP!!!") // no imp
 
 }
 
-func (h *Handlers) CheckWallet() {
+func (h *Handlers) Balance(c echo.Context) error {
+
+	return c.JSON(http.StatusOK, "No IMP!!!") // no imp
 
 }
