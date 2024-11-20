@@ -1,1 +1,1 @@
-# Wallet1000rps
+# Wallet UUID
