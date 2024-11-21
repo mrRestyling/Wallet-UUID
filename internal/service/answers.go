@@ -3,9 +3,10 @@ package service
 import "errors"
 
 var (
-	ErrWalletEmpty   = errors.New("Wallet empty")
-	ErrOperationType = errors.New("Operation type empty")
-	ErrAmount        = errors.New("Amount empty or negative")
+	ErrWalletEmpty   = errors.New("wallet empty")
+	ErrOperationType = errors.New("operation type empty")
+	ErrAmount        = errors.New("amount empty or negative")
+	ErrUUID          = errors.New("invalid format")
 
 	//
 	IDEmpty    = "не указан ID"

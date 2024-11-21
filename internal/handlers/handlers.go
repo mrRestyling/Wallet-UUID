@@ -47,12 +47,19 @@ func (h *Handlers) ChangeWallet(c echo.Context) error {
 		return h.ModelError(c, err, result)
 	}
 
-	
-
-	return c.JSON(http.StatusOK, "No IMP!!!") // no imp
+	return c.JSON(http.StatusOK, result)
 }
 
 func (h *Handlers) Balance(c echo.Context) error {
+	const op = "internal/handlers.Balance"
 
-	return c.JSON(http.StatusOK, "No IMP!!!") // no imp
+	walletID := c.Param("WALLET_UUID")
+
+	result, err := h.Serv.Balance(models.Wallet{WalletID: walletID})
+	if err != nil {
+		log.Printf("%s: %v\n", op, err)
+		return h.ModelError(c, err, result)
+	}
+
+	return c.JSON(http.StatusOK, result)
 }

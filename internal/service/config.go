@@ -3,15 +3,16 @@ package service
 import "wallet/internal/models"
 
 type Service struct {
-	Storage StorageItn
+	Storage StorageInt
 }
 
-type StorageItn interface {
+type StorageInt interface {
 	Create(wallet models.Wallet) (string, error)
 	Change(wallet models.Wallet) (string, error)
+	Balance(wallet models.Wallet) (string, error)
 }
 
-func New(s StorageItn) *Service {
+func New(s StorageInt) *Service {
 	return &Service{
 		Storage: s,
 	}

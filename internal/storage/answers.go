@@ -8,9 +8,9 @@ var (
 	ErrInternal = errors.New("internal")
 	Internal    = "внутренняя ошибка"
 	ErrNotFound = errors.New("not found")
+	AddOK       = "Успешно добавлено"
 
 	//
-	AddGroupOK = "Успешно добавлено"
 
 	ErrSongNotFound = errors.New("empty")
 	SongNotFound    = "песня не найдена"
