@@ -44,8 +44,8 @@ func SayError(err error, message string) {
 
 func Config() string {
 
-	// host := "host=" + os.Getenv("HOST_WALLET")
-	host := "host=postgres"
+	host := "host=" + os.Getenv("HOST_WALLET")
+	// host := "host=postgres"
 	user := "user=" + os.Getenv("POSTGRES_USER")
 	password := "password=" + os.Getenv("POSTGRES_PASSWORD")
 	dbname := "dbname=" + os.Getenv("POSTGRES_DB")
