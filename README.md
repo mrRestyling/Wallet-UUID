@@ -36,6 +36,5 @@
 - GET: 
 Запрос на баланс кошелька `/api/v1/wallets/{WALLET_UUID}`
 
-Key: `WALLET_UUID`
-Value: `UUID`
+Вместо `{WALLET_UUID}` - номер кошелька, например `/api/v1/wallets/123e4567-e89b-12d3-a456-426614174001`
 

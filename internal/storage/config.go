@@ -44,8 +44,8 @@ func SayError(err error, message string) {
 
 func Config() string {
 
-	host := "host=" + os.Getenv("HOST_WALLET")
-	// host := "host=postgres"
+	// host := "host=" + os.Getenv("HOST_WALLET") // локально
+	host := "host=postgres" // docker
 	user := "user=" + os.Getenv("POSTGRES_USER")
 	password := "password=" + os.Getenv("POSTGRES_PASSWORD")
 	dbname := "dbname=" + os.Getenv("POSTGRES_DB")
@@ -55,7 +55,7 @@ func Config() string {
 
 	config := strings.Join(qArr, " ")
 
-	time.Sleep(1 * time.Second) // для контейнеров
+	time.Sleep(3 * time.Second) // для контейнеров
 
 	return config
 
