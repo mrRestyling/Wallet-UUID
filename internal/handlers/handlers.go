@@ -26,6 +26,7 @@ func (h *Handlers) Create(c echo.Context) error {
 		return h.ModelError(c, err, result)
 	}
 
+	log.Printf("%s: %s\n", op, "Success")
 	return c.JSON(http.StatusOK, result)
 }
 
@@ -47,6 +48,7 @@ func (h *Handlers) ChangeWallet(c echo.Context) error {
 		return h.ModelError(c, err, result)
 	}
 
+	log.Printf("%s: %s\n", op, "Success")
 	return c.JSON(http.StatusOK, result)
 }
 
@@ -61,5 +63,6 @@ func (h *Handlers) Balance(c echo.Context) error {
 		return h.ModelError(c, err, result)
 	}
 
+	log.Printf("%s: %s\n", op, "Success")
 	return c.JSON(http.StatusOK, result)
 }
