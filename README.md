@@ -1,13 +1,13 @@
 # Wallet UUID
 
 ## Технологии и инструменты:
-Go
-PostgreSQL
-Docker
-Docker-compose
-ENV
-Echo
-Тесты 
+- Go
+- PostgreSQL
+- Docker
+- Docker-compose
+- ENV
+- Echo
+- Тесты 
 
 ## Запросы:
 
