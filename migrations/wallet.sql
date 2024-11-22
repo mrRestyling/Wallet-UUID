@@ -5,3 +5,11 @@ CREATE TABLE IF NOT EXISTS wallets (
   created_at TIMESTAMP NOT NULL DEFAULT NOW(),
   updated_at TIMESTAMP NOT NULL DEFAULT NOW()
 );
+
+-- DROP TABLE IF EXISTS wallets;
+-- CREATE TABLE IF NOT EXISTS wallets (
+--   wallet_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+--   balance INTEGER NOT NULL DEFAULT 0,
+--   created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+--   updated_at TIMESTAMP NOT NULL DEFAULT NOW()
+-- );
