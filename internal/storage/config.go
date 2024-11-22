@@ -31,8 +31,11 @@ func ConnectDB() *sqlx.DB {
 	err = db.Ping()
 	SayError(err, "Error pinging database")
 
-	return db
+	db.SetMaxOpenConns(30)
+	db.SetMaxIdleConns(10)
+	db.SetConnMaxLifetime(1 * time.Minute)
 
+	return db
 }
 
 func SayError(err error, message string) {
@@ -55,7 +58,7 @@ func Config() string {
 
 	config := strings.Join(qArr, " ")
 
-	time.Sleep(3 * time.Second) // для контейнеров
+	// time.Sleep(3 * time.Second) // для контейнеров
 
 	return config
 
