@@ -8,28 +8,29 @@ import (
 	"github.com/labstack/echo"
 )
 
-func (h *Handlers) Create(c echo.Context) error {
-	const op = "internal/handlers.Create"
+// func (h *Handlers) Create(c echo.Context) error {
+// 	const op = "internal/handlers.Create"
 
-	var wallet models.Wallet
+// 	var wallet models.Wallet
 
-	if err := c.Bind(&wallet); err != nil {
-		log.Println("BadJSON", err)
-		log.Printf("%s: %v\n", op, err)
-		return c.JSON(http.StatusBadRequest, BadJSON)
-	}
+// 	if err := c.Bind(&wallet); err != nil {
+// 		log.Println("BadJSON", err)
+// 		log.Printf("%s: %v\n", op, err)
+// 		return c.JSON(http.StatusBadRequest, BadJSON)
+// 	}
 
-	// Service
-	result, err := h.Serv.Create(wallet)
-	if err != nil {
-		log.Printf("%s: %v\n", op, err)
-		return h.ModelError(c, err, result)
-	}
+// 	// Service
+// 	result, err := h.Serv.Create(wallet)
+// 	if err != nil {
+// 		log.Printf("%s: %v\n", op, err)
+// 		return h.ModelError(c, err, result)
+// 	}
 
-	log.Printf("%s: %s\n", op, "Success")
-	return c.JSON(http.StatusOK, result)
-}
+// 	log.Printf("%s: %s\n", op, "Success")
+// 	return c.JSON(http.StatusOK, result)
+// }
 
+// ChangeWallet - ...
 func (h *Handlers) ChangeWallet(c echo.Context) error {
 	const op = "internal/handlers.ChangeWallet"
 
@@ -52,6 +53,7 @@ func (h *Handlers) ChangeWallet(c echo.Context) error {
 	return c.JSON(http.StatusOK, result)
 }
 
+// Balance - ...
 func (h *Handlers) Balance(c echo.Context) error {
 	const op = "internal/handlers.Balance"
 
