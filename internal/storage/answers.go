@@ -10,6 +10,7 @@ var (
 	Internal    = "внутренняя ошибка"
 	ErrNotFound = errors.New("not found")
 	AddOK       = "Успешно добавлено"
+	RegOK       = "Успешно зарегистрирован"
 
 	//
 
