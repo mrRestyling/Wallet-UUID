@@ -9,6 +9,7 @@ import (
 
 // TODO вынести одинаковые проверки в отдельную функцию
 
+// Create - ...
 func (s *Service) Create(wallet models.Wallet) (string, error) {
 	const op = "internal/service.Create"
 
@@ -22,7 +23,7 @@ func (s *Service) Create(wallet models.Wallet) (string, error) {
 		return "invalid UUID format", errors.New("invalid UUID format")
 	}
 
-	result, err := s.Storage.Create(wallet)
+	result, err := s.Storage.CreateWallet(wallet)
 	if err != nil {
 		log.Printf("%s: %v\n", op, err)
 		return result, err
@@ -31,6 +32,7 @@ func (s *Service) Create(wallet models.Wallet) (string, error) {
 	return result, nil
 }
 
+// Change - ...
 func (s *Service) Change(wallet models.Wallet) (string, error) {
 	const op = "internal/service.Change"
 
@@ -69,6 +71,7 @@ func (s *Service) Change(wallet models.Wallet) (string, error) {
 	return result, nil
 }
 
+// Balance - ...
 func (s *Service) Balance(wallet models.Wallet) (string, error) {
 	const op = "internal/service.Balance"
 

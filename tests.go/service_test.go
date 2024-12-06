@@ -13,7 +13,7 @@ type TestService struct {
 	service.StorageInt
 }
 
-func (s *TestService) Create(wallet models.Wallet) (string, error) {
+func (s *TestService) Create(user models.User) (string, error) {
 	return "Успешно добавлено", nil
 }
 

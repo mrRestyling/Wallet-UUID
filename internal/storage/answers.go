@@ -2,13 +2,16 @@ package storage
 
 import "errors"
 
+//
 var (
+	Clone    = "Уже существует"
 	ErrClone = errors.New("clone")
 
 	ErrInternal = errors.New("internal")
 	Internal    = "внутренняя ошибка"
 	ErrNotFound = errors.New("not found")
 	AddOK       = "Успешно добавлено"
+	RegOK       = "Успешно зарегистрирован"
 
 	//
 

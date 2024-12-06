@@ -7,7 +7,8 @@ import (
 	"wallet/internal/models"
 )
 
-func (s *Storage) Create(wallet models.Wallet) (string, error) {
+// CreateWallet - ...
+func (s *Storage) CreateWallet(wallet models.Wallet) (string, error) {
 	const op = "internal/storage.Create"
 
 	// Проверяем существование кошелека
@@ -29,6 +30,7 @@ func (s *Storage) Create(wallet models.Wallet) (string, error) {
 	return AddOK, nil
 }
 
+// Change - ...
 func (s *Storage) Change(wallet models.Wallet) (string, error) {
 	const op = "internal/storage.Change"
 
@@ -60,6 +62,7 @@ func (s *Storage) Change(wallet models.Wallet) (string, error) {
 
 }
 
+// Balance - ...
 func (s *Storage) Balance(wallet models.Wallet) (string, error) {
 	const op = "internal/storage.Balance"
 
@@ -73,5 +76,4 @@ func (s *Storage) Balance(wallet models.Wallet) (string, error) {
 	}
 
 	return strconv.Itoa(int(balance)), nil
-
 }

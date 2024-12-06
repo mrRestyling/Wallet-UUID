@@ -11,16 +11,19 @@ import (
 	_ "github.com/lib/pq"
 )
 
+// Storage - ...
 type Storage struct {
 	Db *sqlx.DB
 }
 
+// New - ...
 func New(conn *sqlx.DB) *Storage {
 	return &Storage{
 		Db: conn,
 	}
 }
 
+// ConnectDB - ...
 func ConnectDB() *sqlx.DB {
 
 	infoDB := Config()
@@ -38,6 +41,7 @@ func ConnectDB() *sqlx.DB {
 	return db
 }
 
+// SayError - ...
 func SayError(err error, message string) {
 	if err != nil {
 		log.Fatal(message, err)
@@ -45,10 +49,11 @@ func SayError(err error, message string) {
 
 }
 
+// Config - ...
 func Config() string {
 
-	// host := "host=" + os.Getenv("HOST_WALLET") // локально
-	host := "host=postgres" // docker
+	host := "host=" + os.Getenv("HOST_WALLET") // локально
+	// host := "host=postgres" // docker
 	user := "user=" + os.Getenv("POSTGRES_USER")
 	password := "password=" + os.Getenv("POSTGRES_PASSWORD")
 	dbname := "dbname=" + os.Getenv("POSTGRES_DB")
@@ -57,8 +62,6 @@ func Config() string {
 	qArr := []string{host, user, dbname, ssl, password}
 
 	config := strings.Join(qArr, " ")
-
-	// time.Sleep(3 * time.Second) // для контейнеров
 
 	return config
 
