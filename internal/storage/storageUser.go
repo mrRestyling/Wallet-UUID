@@ -14,6 +14,7 @@ func (s *Storage) CreateUser(user models.User) (string, error) {
 	err := s.Db.Get(&uID, "SELECT id FROM users WHERE email = $1", user.Email)
 	if err == nil {
 		log.Println("Пользователь уже существует")
+		return Clone, ErrClone
 	}
 
 	// Создаем пользователя

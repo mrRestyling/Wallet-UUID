@@ -3,10 +3,10 @@ package service
 import (
 	"errors"
 	"fmt"
+	"log"
 	"regexp"
 	"wallet/internal/models"
 
-	"github.com/labstack/gommon/log"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -17,16 +17,19 @@ func (s *Service) RegistrationServ(user models.User) (string, error) {
 	const op = "internal/service.RegistrationServ"
 
 	if user.Email == "" || !isValidEmail(user.Email) {
+		log.Println(user.Email)
+		log.Println("err Email")
 		return "", errors.New("invalid format")
 	}
 
 	if user.Password == "" {
+		log.Println("err Password")
 		return "", errors.New("invalid format")
 	}
 
 	passHash, err := bcrypt.GenerateFromPassword([]byte(user.Password), bcrypt.DefaultCost)
 	if err != nil {
-		log.Error("failed generate password hash")
+		log.Println("failed generate password hash")
 
 		return "", fmt.Errorf("%s: %w", op, err)
 	}
@@ -37,9 +40,9 @@ func (s *Service) RegistrationServ(user models.User) (string, error) {
 
 	id, err := s.Storage.CreateUser(user)
 	if err != nil {
-		log.Error("failed create wallet")
+		log.Println("failed create user")
 
-		return "", fmt.Errorf("%s: %w", op, err)
+		return id, fmt.Errorf("%s: %w", op, err)
 	}
 
 	return id, nil

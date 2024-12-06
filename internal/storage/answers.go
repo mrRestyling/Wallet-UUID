@@ -4,6 +4,7 @@ import "errors"
 
 //
 var (
+	Clone    = "Уже существует"
 	ErrClone = errors.New("clone")
 
 	ErrInternal = errors.New("internal")
