@@ -1,4 +1,4 @@
-# Wallet UUID5
+# Wallet UUID
 
 ## Технологии и инструменты:
 - Go
