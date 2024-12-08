@@ -15,10 +15,12 @@ type Wallet struct {
 }
 
 type User struct {
-	ID       uint   `json:"id"`
+	ID       uint   `json:"-" db:"id"` // для того чтобы get работал, нужно прописать теги в моделе
 	Email    string `json:"email"`
 	Password string `json:"password"`
 	Token    string `json:"token"`
 	PassHash []byte `json:"passHash"`
 	WalletID string `json:"walletId"`
+
+	Claims uint `json:"claims"`
 }
