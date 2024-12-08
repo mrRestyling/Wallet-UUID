@@ -15,6 +15,7 @@ type StorageInt interface {
 
 	CreateUser(user models.User) (string, error)
 	GetUser(user models.User) (models.User, error)
+	// ParseToken(user models.User) (models.User, error)
 }
 
 // New - ...

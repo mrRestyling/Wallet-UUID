@@ -20,6 +20,7 @@ type ServInt interface {
 
 	RegistrationServ(user models.User) (string, error)
 	GenerateToken(user models.User) (string, error)
+	ParseToken(user models.User) (models.User, error)
 }
 
 // New - ...
@@ -34,14 +35,21 @@ func New(s ServInt) *Handlers {
 func (h *Handlers) SetRoutes() {
 	h.E.HideBanner = true
 
-	h.E.POST("/login", h.SignIn)
-
-	h.E.POST("/registration", h.Registration)
-
 	// h.E.POST("/api/v1/create", h.Create)
 
 	h.E.POST("/api/v1/wallet", h.ChangeWallet)
 
 	h.E.GET("/api/v1/wallets/:WALLET_UUID", h.Balance)
 
+	auth := h.E.Group("/auth")
+	auth.POST("/sign-up", h.Registration)
+	auth.POST("/sign-in", h.SignIn)
+
+	api := h.E.Group("/api")
+	api.POST("/v1/wallet", h.ChangeWallet)
+	api.GET("/v1/wallets/:WALLET_UUID", h.Balance)
+
 }
+
+// TODO UserIdentity (middleware)
+// Нет функции create для проверки

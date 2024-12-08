@@ -4,8 +4,14 @@ import (
 	"log"
 	"net/http"
 	"strings"
+	"wallet/internal/models"
 
 	"github.com/labstack/echo"
+)
+
+const (
+	// AuthorizationHeader = "Authorization"
+	UserCtx = "userId"
 )
 
 // UserIdentity - middleware
@@ -27,5 +33,15 @@ func (h *Handlers) UserIdentity(c echo.Context) {
 	}
 
 	// parse token
+
+	userId, err := h.Serv.ParseToken(models.User{Token: headerParts[1]})
+
+	if err != nil {
+		log.Println(err)
+		c.JSON(http.StatusUnauthorized, "Invalid authorization header")
+		return
+	}
+
+	c.Set(UserCtx, userId)
 
 }

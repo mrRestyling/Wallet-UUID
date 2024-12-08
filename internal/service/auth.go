@@ -107,9 +107,25 @@ func isValidEmail(email string) bool {
 	return emailRegex.MatchString(email)
 }
 
-// func generatePasswordHash(password string) string {
-// 	hash := sha1.New()
-// 	hash.Write([]byte(password))
+// ParseToken - ...
+func (s *Service) ParseToken(user models.User) (models.User, error) {
+	token, err := jwt.ParseWithClaims(user.Token, &tokenClaims{}, func(token *jwt.Token) (interface{}, error) {
+		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
+			log.Println("метод не является HMAC")
+			return nil, errors.New("invalid signing method")
+		}
+		return []byte(signingKey), nil
+	})
 
-// 	return fmt.Sprintf("%x", hash.Sum([]byte(salt)))
-// }
+	if err != nil {
+		return models.User{}, err
+	}
+
+	claims, ok := token.Claims.(*tokenClaims)
+	if !ok {
+		return models.User{}, errors.New("token claims are not of type")
+	}
+
+	return models.User{Claims: claims.UserID}, nil
+
+}
