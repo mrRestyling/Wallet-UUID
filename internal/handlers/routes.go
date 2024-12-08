@@ -17,7 +17,9 @@ type ServInt interface {
 	Create(wallet models.Wallet) (string, error)
 	Change(wallet models.Wallet) (string, error)
 	Balance(wallet models.Wallet) (string, error)
+
 	RegistrationServ(user models.User) (string, error)
+	GenerateToken(user models.User) (string, error)
 }
 
 // New - ...
@@ -32,7 +34,7 @@ func New(s ServInt) *Handlers {
 func (h *Handlers) SetRoutes() {
 	h.E.HideBanner = true
 
-	// h.E.POST("/login", h.Login)
+	h.E.POST("/login", h.SignIn)
 
 	h.E.POST("/registration", h.Registration)
 

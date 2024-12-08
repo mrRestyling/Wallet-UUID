@@ -14,6 +14,7 @@ type StorageInt interface {
 	Balance(wallet models.Wallet) (string, error)
 
 	CreateUser(user models.User) (string, error)
+	GetUser(user models.User) (models.User, error)
 }
 
 // New - ...

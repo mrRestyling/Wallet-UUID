@@ -14,8 +14,8 @@ type Wallet struct {
 	UpdatedTime time.Time `json:"update"`
 }
 
-type User struct {
-	ID       uint   `json:"id"`
+type User struct { 
+	ID       uint   `json:"-" db:"id"` // для того чтобы get работал, нужно прописать теги в моделе
 	Email    string `json:"email"`
 	Password string `json:"password"`
 	Token    string `json:"token"`
