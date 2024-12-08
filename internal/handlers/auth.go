@@ -53,5 +53,5 @@ func (h *Handlers) SignIn(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, err)
 	}
 
-	return c.JSON(http.StatusOK, token)
+	return c.JSON(http.StatusOK, map[string]string{"token": token})
 }

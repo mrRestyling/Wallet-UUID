@@ -39,7 +39,7 @@ func (s *Service) GenerateToken(user models.User) (string, error) {
 
 	// user.PassHash = []byte(generatePasswordHash(user.Password))
 
-	log.Println(user.Email, user.PassHash)
+	// log.Println(user.Email, user.PassHash)
 
 	result, err := s.Storage.GetUser(user)
 	if err != nil {
