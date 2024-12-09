@@ -126,6 +126,6 @@ func (s *Service) ParseToken(user models.User) (models.User, error) {
 		return models.User{}, errors.New("token claims are not of type")
 	}
 
-	return models.User{Claims: claims.UserID}, nil
+	return models.User{ID: claims.UserID}, nil
 
 }

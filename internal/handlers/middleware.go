@@ -15,33 +15,38 @@ const (
 )
 
 // UserIdentity - middleware
-func (h *Handlers) UserIdentity(c echo.Context) {
-	header := c.Request().Header.Get("Authorization")
+func (h *Handlers) UserIdentity(next echo.HandlerFunc) echo.HandlerFunc {
+	return func(c echo.Context) error {
+		header := c.Request().Header.Get("Authorization")
 
-	if header == "" {
-		log.Println("header is empty")
-		c.JSON(http.StatusUnauthorized, "Empty authorization header")
-		return
+		if header == "" {
+			log.Println("header is empty")
+			c.JSON(http.StatusUnauthorized, "Empty authorization header")
+			return echo.NewHTTPError(http.StatusUnauthorized, "Empty authorization header")
+		}
+
+		headerParts := strings.Split(header, " ")
+
+		if len(headerParts) != 2 {
+			log.Println("invalid token")
+			c.JSON(http.StatusUnauthorized, "Invalid authorization header")
+			return echo.NewHTTPError(http.StatusUnauthorized, "Invalid authorization header")
+		}
+
+		// parse token
+
+		userID, err := h.Serv.ParseToken(models.User{Token: headerParts[1]})
+
+		if err != nil {
+			log.Println(err)
+			c.JSON(http.StatusUnauthorized, "Invalid authorization header")
+			return echo.NewHTTPError(http.StatusUnauthorized, "Invalid authorization header")
+		}
+
+		c.Set(UserCtx, userID)
+		log.Println(userID)
+
+		return next(c)
 	}
-
-	headerParts := strings.Split(header, " ")
-
-	if len(headerParts) != 2 {
-		log.Println("invalid token")
-		c.JSON(http.StatusUnauthorized, "Invalid authorization header")
-		return
-	}
-
-	// parse token
-
-	userId, err := h.Serv.ParseToken(models.User{Token: headerParts[1]})
-
-	if err != nil {
-		log.Println(err)
-		c.JSON(http.StatusUnauthorized, "Invalid authorization header")
-		return
-	}
-
-	c.Set(UserCtx, userId)
 
 }
