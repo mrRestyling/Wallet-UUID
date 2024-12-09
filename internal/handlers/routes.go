@@ -35,19 +35,20 @@ func New(s ServInt) *Handlers {
 func (h *Handlers) SetRoutes() {
 	h.E.HideBanner = true
 
-	// h.E.POST("/api/v1/create", h.Create)
+	// h.E.POST("/api/v1/wallet", h.ChangeWallet)
 
-	h.E.POST("/api/v1/wallet", h.ChangeWallet)
-
-	h.E.GET("/api/v1/wallets/:WALLET_UUID", h.Balance)
+	// h.E.GET("/api/v1/wallets/:WALLET_UUID", h.Balance)
 
 	auth := h.E.Group("/auth")
 	auth.POST("/sign-up", h.Registration)
 	auth.POST("/sign-in", h.SignIn)
 
 	api := h.E.Group("/api")
-	api.POST("/v1/wallet", h.ChangeWallet)
-	api.GET("/v1/wallets/:WALLET_UUID", h.Balance)
+	api.Use(h.UserIdentity)
+	api.POST("/wallet", h.ChangeWallet)
+	api.GET("/wallets/:WALLET_UUID", h.Balance)
+	// api.POST("/create", h.Create)
+	// h.E.POST("/api/v1/create", h.Create)
 
 }
 
